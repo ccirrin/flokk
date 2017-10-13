@@ -4,8 +4,6 @@ package org.launchpadcs.flokk;
  * Created by ccirr on 10/11/2017.
  */
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -22,12 +20,10 @@ import com.google.gson.Gson;
 
 import java .util.List;
 
-import static android.app.Activity.RESULT_OK;
-
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.MyViewHolder> {
 
     private List<Event> eventsList;
-    private MainActivity con;
+    private MyEventsActivity con;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, description, date, location;
@@ -45,7 +41,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.MyViewHold
         }
     }
 
-    public EventsAdapter(List<Event> eventsList, MainActivity con) {
+    public EventsAdapter(List<Event> eventsList, MyEventsActivity con) {
         this.eventsList = eventsList;
         this.con = con;
     }
@@ -98,7 +94,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.MyViewHold
                 String json = new Gson().toJson(event);
                 intent.putExtra("jsonObject", json);
                 intent.putExtra("position", position);
-                con.startActivityForResult(intent, MainActivity.REQUEST_EDIT_EVENT);
+                con.startActivityForResult(intent, MyEventsActivity.REQUEST_EDIT_EVENT);
             }
         });
     }

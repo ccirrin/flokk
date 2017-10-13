@@ -1,6 +1,5 @@
 package org.launchpadcs.flokk;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +15,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MyEventsActivity extends AppCompatActivity {
     private List<Event> eventsList = new ArrayList<>();
     private RecyclerView recyclerView;
     public EventsAdapter mAdapter;
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent e = new Intent(MainActivity.this, CreateEventActivity.class);
+                Intent e = new Intent(MyEventsActivity.this, CreateEventActivity.class);
                 startActivityForResult(e, REQUEST_CREATE_EVENT);
             }
         });
