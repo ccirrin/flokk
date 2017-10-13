@@ -19,10 +19,11 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private List<Event> eventsList = new ArrayList<>();
     private RecyclerView recyclerView;
-    private EventsAdapter mAdapter;
+    public EventsAdapter mAdapter;
     private FloatingActionButton createButton;
 
-    public static final int CREATE_EVENT = 1000;
+    public static final int REQUEST_CREATE_EVENT = 1000;
+    public static final int REQUEST_EDIT_EVENT = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent e = new Intent(MainActivity.this, CreateEventActivity.class);
-                startActivityForResult(e, CREATE_EVENT);
+                startActivityForResult(e, REQUEST_CREATE_EVENT);
             }
         });
 
@@ -56,10 +57,21 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == CREATE_EVENT && resultCode == RESULT_OK) {
+        if(requestCode == REQUEST_CREATE_EVENT && resultCode == RESULT_OK) {
             String json = data.getStringExtra("jsonObject");
             Event event = new Gson().fromJson(json, Event.class);
             eventsList.add(event);
+            mAdapter.notifyDataSetChanged();
+
+        }
+        else if(requestCode == REQUEST_EDIT_EVENT && resultCode == RESULT_OK) {
+            String json = data.getStringExtra("jsonObject");
+            Event event = new Gson().fromJson(json, Event.class);
+            int pos = data.getIntExtra("position", -1);
+            if(pos == -1) {
+                return;
+            }
+            eventsList.set(pos,event);
             mAdapter.notifyDataSetChanged();
 
         }
