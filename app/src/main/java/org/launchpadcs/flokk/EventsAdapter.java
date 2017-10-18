@@ -61,7 +61,11 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.MyViewHold
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(con, "Event was clicked on", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(con, EventInformation.class);
+                String json = new Gson().toJson(event);
+                intent.putExtra("jsonObject", json);
+                con.startActivity(intent);
+
             }
         });
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
