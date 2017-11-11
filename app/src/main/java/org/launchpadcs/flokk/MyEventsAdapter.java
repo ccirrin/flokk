@@ -18,9 +18,16 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import org.launchpadcs.flokk.Api.FlokkApi;
+import org.launchpadcs.flokk.Api.FlokkApiHelper;
+
 import java .util.List;
 
-public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.MyViewHolder> {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.MyViewHolder> {
 
     private List<Event> eventsList;
     private MyEventsActivity con;
@@ -41,7 +48,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.MyViewHold
         }
     }
 
-    public EventsAdapter(List<Event> eventsList, MyEventsActivity con) {
+    public MyEventsAdapter(List<Event> eventsList, MyEventsActivity con) {
         this.eventsList = eventsList;
         this.con = con;
     }
@@ -78,6 +85,22 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.MyViewHold
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        FlokkApiHelper.getInstance(con).deleteEvent(new CarloInteger(event._id)).enqueue(new Callback<Message>() {
+                            @Override
+                            public void onResponse(Call<Message> call, Response<Message> response) {
+                                if(response.code() != 200) {
+                                    Toast.makeText(con, "Something went kinda wrong", Toast.LENGTH_SHORT);
+                                    return;
+                                }
+                                Toast.makeText(con, "Something went right", Toast.LENGTH_SHORT);
+                            }
+
+                            @Override
+                            public void onFailure(Call<Message> call, Throwable t) {
+                                Toast.makeText(con, "Something went wrong", Toast.LENGTH_SHORT);
+
+                            }
+                        });
                         eventsList.remove(position);
                         notifyDataSetChanged();
                         dialog.dismiss();
@@ -94,11 +117,9 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.MyViewHold
         });
         holder.editButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(con, EditEventActivity.class);
-                String json = new Gson().toJson(event);
-                intent.putExtra("jsonObject", json);
-                intent.putExtra("position", position);
-                con.startActivityForResult(intent, MyEventsActivity.REQUEST_EDIT_EVENT);
+                final Intent intent = new Intent(con, EditEventActivity.class);
+                intent.putExtra("jsonObject", new Gson().toJson(event));
+                con.startActivity(intent);
             }
         });
     }

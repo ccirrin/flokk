@@ -9,12 +9,23 @@ public class Event {
     private String description;
     private String date;
     private String location;
+    private String authToken;
+    public String _id;
 
-    public Event(String title, String description, String date, String location) {
+    public Event(String title, String description, String date, String location, String authToken) {
         this.title = title;
         this.description = description;
         this.date = date;
         this.location = location;
+        this.authToken = authToken;
+    }
+
+    public Event(String title, String description, String date, String location) {
+        this(title, description, date, location, null);
+    }
+
+    public Event() {
+
     }
 
     public String getTitle() {
@@ -47,5 +58,13 @@ public class Event {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 }
