@@ -1,6 +1,8 @@
 package org.launchpadcs.flokk;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -42,27 +44,42 @@ public class EditEventActivity extends AppCompatActivity {
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                event.setTitle(title.getText().toString());
-                event.setDescription(description.getText().toString());
-                event.setDate(date.getText().toString());
-                event.setLocation(location.getText().toString());
-                FlokkApiHelper.getInstance(getApplicationContext()).editEvent(event).enqueue(new Callback<Message>() {
-                    @Override
-                    public void onResponse(Call<Message> call, Response<Message> response) {
-                        if(response.code() != 200) {
-                            Toast.makeText(getApplicationContext(), "Something went kinda wrong", Toast.LENGTH_SHORT);
-                            return;
+                if(title.getText().toString().equals("") || description.getText().toString().equals("") || date.getText().toString().equals("") || location.getText().toString().equals("")) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(EditEventActivity.this);
+                    builder.setCancelable(false);
+                    builder.setTitle("Error");
+                    builder.setMessage("You must fill out all fields.");
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
                         }
-                        Toast.makeText(getApplicationContext(), "Something went right", Toast.LENGTH_SHORT);
-                        Intent intent = new Intent(EditEventActivity.this, MyEventsActivity.class);
-                        startActivity(intent);
-                    }
+                    });
+                    builder.create().show();
+                }
+                else {
+                    event.setTitle(title.getText().toString());
+                    event.setDescription(description.getText().toString());
+                    event.setDate(date.getText().toString());
+                    event.setLocation(location.getText().toString());
+                    FlokkApiHelper.getInstance(getApplicationContext()).editEvent(event).enqueue(new Callback<Message>() {
+                        @Override
+                        public void onResponse(Call<Message> call, Response<Message> response) {
+                            if (response.code() != 200) {
+                                Toast.makeText(getApplicationContext(), "Something went kinda wrong", Toast.LENGTH_SHORT);
+                                return;
+                            }
+                            Toast.makeText(getApplicationContext(), "Something went right", Toast.LENGTH_SHORT);
+                            Intent intent = new Intent(EditEventActivity.this, MyEventsActivity.class);
+                            startActivity(intent);
+                        }
 
-                    @Override
-                    public void onFailure(Call<Message> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT);
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<Message> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT);
+                        }
+                    });
+                }
 
             }
         });
