@@ -3,6 +3,7 @@ package org.launchpadcs.flokk.Api;
 import org.launchpadcs.flokk.CarloInteger;
 import org.launchpadcs.flokk.Event;
 import org.launchpadcs.flokk.Message;
+import org.launchpadcs.flokk.User;
 
 import java.util.List;
 
@@ -28,5 +29,11 @@ public interface FlokkApi {
 
     @POST("/events/update")
     Call<Message> editEvent(@Body Event event);
+
+    @POST("/user/create")
+    Call<Message> createUser(@Body User user);
+
+    @POST("/user/delete")
+    Call<Message> deleteUser(@Body CarloInteger carloInteger);
 
 }
