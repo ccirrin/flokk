@@ -1,18 +1,26 @@
 package org.launchpadcs.flokk;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 import org.launchpadcs.flokk.Api.FlokkApiHelper;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,7 +31,7 @@ public class EditEventActivity extends AppCompatActivity {
     private Event event;
     private EditText title;
     private EditText description;
-    private EditText date;
+    private TextView date;
     private EditText location;
     private Button post;
 
@@ -34,7 +42,24 @@ public class EditEventActivity extends AppCompatActivity {
         event = new Gson().fromJson(getIntent().getStringExtra("jsonObject"), Event.class);
         title = (EditText) findViewById(R.id.title);
         description = (EditText) findViewById(R.id.description);
-        date = (EditText) findViewById(R.id.date);
+        date = (TextView) findViewById(R.id.date);
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(EditEventActivity.this);
+                final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yy");
+                datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        date.setText(sdf.format(new Date(year, month, dayOfMonth)));
+                    }
+                });
+                datePickerDialog.show();
+            }
+        });
+
         location = (EditText) findViewById(R.id.location);
         post = (Button) findViewById(R.id.postButton);
         title.setText(event.getTitle());
@@ -85,5 +110,11 @@ public class EditEventActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(EditEventActivity.this, HomeActivity.class);
+        startActivity(intent);
     }
 }
