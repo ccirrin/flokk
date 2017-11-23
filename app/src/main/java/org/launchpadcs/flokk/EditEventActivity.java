@@ -15,6 +15,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.gson.Gson;
 
 import org.launchpadcs.flokk.Api.FlokkApiHelper;
@@ -32,8 +36,9 @@ public class EditEventActivity extends AppCompatActivity {
     private EditText title;
     private EditText description;
     private TextView date;
-    private EditText location;
+    private PlaceAutocompleteFragment location;
     private Button post;
+    private String locationSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +65,32 @@ public class EditEventActivity extends AppCompatActivity {
             }
         });
 
-        location = (EditText) findViewById(R.id.location);
+        locationSelected = event.getLocation();
+        location = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.location);
+
+        location.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                locationSelected = place.getName().toString();
+            }
+
+            @Override
+            public void onError(Status status) {
+                locationSelected = "";
+            }
+        });
+
         post = (Button) findViewById(R.id.postButton);
         title.setText(event.getTitle());
         description.setText(event.getDescription());
         date.setText(event.getDate());
         location.setText(event.getLocation());
+
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(title.getText().toString().equals("") || description.getText().toString().equals("") || date.getText().toString().equals("") || location.getText().toString().equals("")) {
+                if(title.getText().toString().equals("") || description.getText().toString().equals("") || date.getText().toString().equals("") || locationSelected.equals("")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(EditEventActivity.this);
                     builder.setCancelable(false);
                     builder.setTitle("Error");
@@ -86,7 +107,7 @@ public class EditEventActivity extends AppCompatActivity {
                     event.setTitle(title.getText().toString());
                     event.setDescription(description.getText().toString());
                     event.setDate(date.getText().toString());
-                    event.setLocation(location.getText().toString());
+                    event.setLocation(locationSelected);
                     FlokkApiHelper.getInstance(getApplicationContext()).editEvent(event).enqueue(new Callback<Message>() {
                         @Override
                         public void onResponse(Call<Message> call, Response<Message> response) {

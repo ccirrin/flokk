@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.gesture.GestureOverlayView;
+import android.location.Location;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
@@ -19,6 +20,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.gson.Gson;
 
 import org.launchpadcs.flokk.Api.FlokkApi;
@@ -33,9 +39,11 @@ import retrofit2.Response;
 
 public class CreateEventActivity extends AppCompatActivity {
 
-    EditText title, description, location;
+    EditText title, description;
+    PlaceAutocompleteFragment location;
     TextView date;
     Button post;
+    String locationSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +72,20 @@ public class CreateEventActivity extends AppCompatActivity {
             }
         });
 
-        location = (EditText) findViewById(R.id.location);
+        location = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.location);
+
+        location.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                locationSelected = place.getName().toString();
+            }
+
+            @Override
+            public void onError(Status status) {
+                locationSelected = "";
+            }
+        });
 
         post = (Button) findViewById(R.id.postButton);
         post.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +94,7 @@ public class CreateEventActivity extends AppCompatActivity {
                 String titleStr = title.getText().toString();
                 String descStr = description.getText().toString();
                 String dateStr = date.getText().toString();
-                String locStr = location.getText().toString();
+                String locStr = locationSelected;
 
                 if (titleStr.equals("") || descStr.equals("") || dateStr.equals("") || locStr.equals("")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(CreateEventActivity.this);

@@ -47,12 +47,12 @@
         android:layout_height="wrap_content"
         android:text="Location"
         android:textSize="30sp" />
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <fragment
         android:id="@+id/location"
-        android:hint="Location"
-        android:paddingBottom="20dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+        />
 
     <Button
         android:layout_width="match_parent"
