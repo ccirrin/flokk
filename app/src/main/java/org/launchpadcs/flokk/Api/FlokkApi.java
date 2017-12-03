@@ -30,10 +30,4 @@ public interface FlokkApi {
     @POST("/events/update")
     Call<Message> editEvent(@Body Event event);
 
-    @POST("/user/create")
-    Call<Message> createUser(@Body User user);
-
-    @POST("/user/delete")
-    Call<Message> deleteUser(@Body CarloInteger carloInteger);
-
 }

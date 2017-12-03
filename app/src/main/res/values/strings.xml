@@ -2,4 +2,5 @@
     <string name="app_name">Flokk</string>
     <string name="baseurl">https://10.0.0.2:5000</string>
     <string name="title_activity_maps">Flokk</string>
+    <string name="google_client_id">34663104710-q379q4sc9buvjlq6frt7q29kgb4382vn.apps.googleusercontent.com</string>
 </resources>

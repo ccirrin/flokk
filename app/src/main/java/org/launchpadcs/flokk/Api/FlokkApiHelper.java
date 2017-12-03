@@ -17,7 +17,7 @@ public class FlokkApiHelper {
     public static FlokkApi getInstance(Context context) {
         if(flokkApi == null) {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("https://sheltered-reef-38706.herokuapp.com").addConverterFactory(GsonConverterFactory.create())
+                    .baseUrl("https://gentle-journey-72147.herokuapp.com").addConverterFactory(GsonConverterFactory.create())
                     .build();
             flokkApi = retrofit.create(FlokkApi.class);
 

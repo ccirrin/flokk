@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "34663104710",
+    "project_id": "flokk-1511402990902"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34663104710:android:c329cea2602c52b6",
+        "android_client_info": {
+          "package_name": "org.launchpadcs.flokk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "34663104710-mhe3jfmk2q2glhs12l019q5l3gecarkc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.launchpadcs.flokk",
+            "certificate_hash": "32ae6e7a702db654782de7ab8cb54692a2a6ffd3"
+          }
+        },
+        {
+          "client_id": "34663104710-q379q4sc9buvjlq6frt7q29kgb4382vn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClj_TUfsMvDMs6Mdo9t8PtoBMHd2oRKug"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
