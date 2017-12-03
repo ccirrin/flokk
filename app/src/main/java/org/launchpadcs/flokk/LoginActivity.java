@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private SignInButton signInButton;
     private GoogleApiClient apiClient;
-    private String email;
+    public static String email;
 
     // Bundle key for account object
     private static final String KEY_ACCOUNT = "key_account";
@@ -144,7 +144,6 @@ public class LoginActivity extends AppCompatActivity {
         Log.d("TOK MASTER", TOKEN);
         Log.d("PHOTO_URL", photoUrl);
         Intent myIntent = new Intent(LoginActivity.this, HomeActivity.class);
-        myIntent.putExtra("email", email);
         startActivity(myIntent);
         finish();
 

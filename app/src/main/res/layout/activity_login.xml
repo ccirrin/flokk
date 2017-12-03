@@ -9,23 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <EditText
-            android:id="@+id/usernameText"
-            android:hint="username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-        <EditText
-            android:id="@+id/passwordText"
-            android:hint="password"
-            android:password="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
         <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign in"/>
+            android:text="Sign in" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

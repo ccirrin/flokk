@@ -62,6 +62,7 @@ public class CreateEventActivity extends AppCompatActivity {
         description = (EditText) findViewById(R.id.description);
         date = (TextView) findViewById(R.id.date);
         time = (TextView) findViewById(R.id.time);
+        email = HomeActivity.email;
 
         date.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -125,7 +126,7 @@ public class CreateEventActivity extends AppCompatActivity {
                 String timeStr = time.getText().toString();
                 String locStr = locationSelected;
 
-                if (titleStr.equals("") || descStr.equals("") || dateStr.equals("") || locStr.equals("") || latitude == 0.0 || longitude == 0.0 || email != null) {
+                if (titleStr.equals("") || descStr.equals("") || dateStr.equals("") || locStr.equals("") || email == null) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(CreateEventActivity.this);
                     builder.setCancelable(false);
                     builder.setTitle("Error");

@@ -22,6 +22,7 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 
 import org.launchpadcs.flokk.Api.FlokkApiHelper;
@@ -43,6 +44,7 @@ public class EditEventActivity extends AppCompatActivity {
     private PlaceAutocompleteFragment location;
     private Button post;
     private String locationSelected;
+    private double latitude, longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,9 @@ public class EditEventActivity extends AppCompatActivity {
             @Override
             public void onPlaceSelected(Place place) {
                 locationSelected = place.getName().toString();
+                LatLng placeLatLng = place.getLatLng();
+                latitude = placeLatLng.latitude;
+                longitude = placeLatLng.longitude;
             }
 
             @Override
@@ -133,6 +138,8 @@ public class EditEventActivity extends AppCompatActivity {
                     event.setDate(date.getText().toString());
                     event.setTime(time.getText().toString());
                     event.setLocation(locationSelected);
+                    event.setLatitude(latitude);
+                    event.setLongitude(longitude);
                     FlokkApiHelper.getInstance(getApplicationContext()).editEvent(event).enqueue(new Callback<Message>() {
                         @Override
                         public void onResponse(Call<Message> call, Response<Message> response) {

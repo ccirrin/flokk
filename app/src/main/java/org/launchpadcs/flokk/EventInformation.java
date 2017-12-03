@@ -14,6 +14,7 @@ public class EventInformation extends AppCompatActivity {
     private TextView title;
     private TextView description;
     private TextView date;
+    private TextView time;
     private TextView location;
 
     @Override
@@ -24,10 +25,12 @@ public class EventInformation extends AppCompatActivity {
         title = (TextView) findViewById(R.id.title);
         description = (TextView) findViewById(R.id.description);
         date = (TextView) findViewById(R.id.date);
+        time = (TextView) findViewById(R.id.time);
         location = (TextView) findViewById(R.id.location);
         title.setText(event.getTitle());
         description.setText(event.getDescription());
         date.setText(event.getDate());
+        time.setText(event.getTime());
         location.setText(event.getLocation());
     }
 }

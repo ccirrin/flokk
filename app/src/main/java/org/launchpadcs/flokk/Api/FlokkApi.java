@@ -30,4 +30,7 @@ public interface FlokkApi {
     @POST("/events/update")
     Call<Message> editEvent(@Body Event event);
 
+    @POST("/events/user")
+    Call<List<Event>> getUserEvents(@Body String email);
+
 }

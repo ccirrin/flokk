@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 
 import org.launchpadcs.flokk.Api.FlokkApi;
 import org.launchpadcs.flokk.Api.FlokkApiHelper;
+import org.w3c.dom.Text;
 
 import java .util.List;
 
@@ -33,7 +34,7 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.MyView
     private MyEventsActivity con;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, description, date, location;
+        public TextView title, description, date, time, location;
         public CardView cardView;
         public Button editButton, deleteButton;
         public MyViewHolder(View view) {
@@ -41,6 +42,7 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.MyView
             title = (TextView) view.findViewById(R.id.title);
             description = (TextView) view.findViewById(R.id.description);
             date = (TextView) view.findViewById(R.id.date);
+            time = (TextView) view.findViewById(R.id.time);
             location = (TextView) view.findViewById(R.id.location);
             cardView = (CardView) view.findViewById(R.id.cv);
             editButton = (Button) view.findViewById(R.id.editButton);
@@ -64,6 +66,7 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.MyView
         holder.title.setText(event.getTitle());
         holder.description.setText(event.getDescription());
         holder.date.setText(event.getDate());
+        holder.time.setText(event.getTime());
         holder.location.setText(event.getLocation());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 /**
@@ -21,17 +23,18 @@ import java.util.List;
 
 public class GlobalEventsAdapter extends RecyclerView.Adapter<GlobalEventsAdapter.MyViewHolder> {
 
-    private List<Event> eventsList;
+    private static List<Event> eventsList;
     private HomeActivity con;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, description, date, location;
+        public TextView title, description, date, time, location;
         public CardView cardView;
         public MyViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.title);
             description = (TextView) view.findViewById(R.id.description);
             date = (TextView) view.findViewById(R.id.date);
+            time = (TextView) view.findViewById(R.id.time);
             location = (TextView) view.findViewById(R.id.location);
             cardView = (CardView) view.findViewById(R.id.cv);
         }
@@ -53,6 +56,7 @@ public class GlobalEventsAdapter extends RecyclerView.Adapter<GlobalEventsAdapte
         holder.title.setText(event.getTitle());
         holder.description.setText(event.getDescription());
         holder.date.setText(event.getDate());
+        holder.time.setText(event.getTime());
         holder.location.setText(event.getLocation());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +73,10 @@ public class GlobalEventsAdapter extends RecyclerView.Adapter<GlobalEventsAdapte
 
     public int getItemCount() {
         return eventsList.size();
+    }
+
+    public static List<Event> getEventsList() {
+        return eventsList;
     }
 
 
