@@ -1,6 +1,7 @@
 package org.launchpadcs.flokk;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -8,11 +9,13 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.Status;
@@ -36,6 +39,7 @@ public class EditEventActivity extends AppCompatActivity {
     private EditText title;
     private EditText description;
     private TextView date;
+    private TextView time;
     private PlaceAutocompleteFragment location;
     private Button post;
     private String locationSelected;
@@ -48,6 +52,7 @@ public class EditEventActivity extends AppCompatActivity {
         title = (EditText) findViewById(R.id.title);
         description = (EditText) findViewById(R.id.description);
         date = (TextView) findViewById(R.id.date);
+        time = (TextView) findViewById(R.id.time);
 
         date.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -62,6 +67,24 @@ public class EditEventActivity extends AppCompatActivity {
                     }
                 });
                 datePickerDialog.show();
+            }
+        });
+
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Date currentTime = new Date();
+                final SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
+                currentTime.setSeconds(0);
+                TimePickerDialog timePickerDialog = new TimePickerDialog(EditEventActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        currentTime.setHours(hourOfDay);
+                        currentTime.setMinutes(minute);
+                        time.setText(sdf.format(currentTime));
+                    }
+                },currentTime.getHours(), currentTime.getMinutes(), false);
+                timePickerDialog.show();
             }
         });
 
@@ -85,12 +108,13 @@ public class EditEventActivity extends AppCompatActivity {
         title.setText(event.getTitle());
         description.setText(event.getDescription());
         date.setText(event.getDate());
+        time.setText(event.getTime());
         location.setText(event.getLocation());
 
         post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(title.getText().toString().equals("") || description.getText().toString().equals("") || date.getText().toString().equals("") || locationSelected.equals("")) {
+                if(title.getText().toString().equals("") || description.getText().toString().equals("") || date.getText().toString().equals("") || locationSelected.equals("") || time.getText().toString().equals("")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(EditEventActivity.this);
                     builder.setCancelable(false);
                     builder.setTitle("Error");
@@ -107,6 +131,7 @@ public class EditEventActivity extends AppCompatActivity {
                     event.setTitle(title.getText().toString());
                     event.setDescription(description.getText().toString());
                     event.setDate(date.getText().toString());
+                    event.setTime(time.getText().toString());
                     event.setLocation(locationSelected);
                     FlokkApiHelper.getInstance(getApplicationContext()).editEvent(event).enqueue(new Callback<Message>() {
                         @Override

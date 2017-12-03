@@ -25,6 +25,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button myEventsButton;
     private FloatingActionButton createButton;
     private RecyclerView eventsRecycler;
+    public String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +34,12 @@ public class HomeActivity extends AppCompatActivity {
         myEventsButton = (Button) findViewById(R.id.myEventsButton);
         createButton = (FloatingActionButton) findViewById(R.id.createButton);
         eventsRecycler = (RecyclerView) findViewById(R.id.eventsRecycler);
+        email = getIntent().getStringExtra("email");
         myEventsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, MyEventsActivity.class);
+
                 startActivity(intent);
             }
         });

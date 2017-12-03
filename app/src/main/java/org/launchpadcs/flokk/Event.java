@@ -9,19 +9,22 @@ public class Event {
     private String description;
     private String date;
     private String location;
-    private String authToken;
+    private String email;
+    private String time;
+    private double latitude;
+    private double longitude;
     public String _id;
 
-    public Event(String title, String description, String date, String location, String authToken) {
+
+    public Event(String title, String description, String date, String time, String location, String email, double latitude, double longitude) {
         this.title = title;
         this.description = description;
         this.date = date;
+        this.time = time;
         this.location = location;
-        this.authToken = authToken;
-    }
-
-    public Event(String title, String description, String date, String location) {
-        this(title, description, date, location, null);
+        this.email = email;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public Event() {
@@ -52,6 +55,15 @@ public class Event {
         this.date = date;
     }
 
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+
     public String getLocation() {
         return location;
     }
@@ -60,11 +72,27 @@ public class Event {
         this.location = location;
     }
 
-    public String getAuthToken() {
-        return authToken;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAuthToken(String authToken) {
-        this.authToken = authToken;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }
