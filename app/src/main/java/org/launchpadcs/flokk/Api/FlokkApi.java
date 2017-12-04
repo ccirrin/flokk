@@ -1,6 +1,7 @@
 package org.launchpadcs.flokk.Api;
 
 import org.launchpadcs.flokk.CarloInteger;
+import org.launchpadcs.flokk.Email;
 import org.launchpadcs.flokk.Event;
 import org.launchpadcs.flokk.Message;
 
@@ -30,6 +31,6 @@ public interface FlokkApi {
     Call<Message> editEvent(@Body Event event);
 
     @POST("/events/user")
-    Call<List<Event>> getUserEvents(@Body String email);
+    Call<List<Event>> getUserEvents(@Body Email email);
 
 }

@@ -86,7 +86,7 @@ public class MyEventsActivity extends AppCompatActivity {
     }*/
 
     private void prepareEventData() {
-        FlokkApiHelper.getInstance(this).getUserEvents(HomeActivity.email).enqueue(new Callback<List<Event>>() {
+        FlokkApiHelper.getInstance(this).getUserEvents(new Email(HomeActivity.email)).enqueue(new Callback<List<Event>>() {
             @Override
             public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
                 if(response.code() != 200) {
