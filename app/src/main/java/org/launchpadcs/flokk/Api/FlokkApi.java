@@ -3,7 +3,6 @@ package org.launchpadcs.flokk.Api;
 import org.launchpadcs.flokk.CarloInteger;
 import org.launchpadcs.flokk.Event;
 import org.launchpadcs.flokk.Message;
-import org.launchpadcs.flokk.User;
 
 import java.util.List;
 

@@ -23,6 +23,7 @@ import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
     private Button myEventsButton;
+    private Button mapsActivityButton;
     private FloatingActionButton createButton;
     private RecyclerView eventsRecycler;
     public static String email;
@@ -32,6 +33,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         myEventsButton = (Button) findViewById(R.id.myEventsButton);
+        mapsActivityButton = (Button) findViewById(R.id.mapsActivityButton);
         createButton = (FloatingActionButton) findViewById(R.id.createButton);
         eventsRecycler = (RecyclerView) findViewById(R.id.eventsRecycler);
         email = LoginActivity.email;
@@ -40,7 +42,13 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, MyEventsActivity.class);
-
+                startActivity(intent);
+            }
+        });
+        mapsActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, MapsActivity.class);
                 startActivity(intent);
             }
         });
