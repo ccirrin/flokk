@@ -3,4 +3,10 @@
     <string name="baseurl">https://10.0.0.2:5000</string>
     <string name="google_client_id">34663104710-q379q4sc9buvjlq6frt7q29kgb4382vn.apps.googleusercontent.com</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_tab">TabActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

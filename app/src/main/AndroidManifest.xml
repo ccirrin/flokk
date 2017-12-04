@@ -20,12 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MyEventsActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CreateEventActivity" />
         <activity android:name=".EditEventActivity" />
-        <activity android:name=".HomeActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,8 +36,9 @@
             android:value="AIzaSyC66NZmlskYCuOiBQkX4bjhDZSEJ_rRUVc" />
 
         <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:name=".TabActivity"
+            android:label="@string/title_activity_tab"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

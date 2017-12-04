@@ -7,53 +7,15 @@
     android:orientation="vertical"
     tools:context="org.launchpadcs.flokk.HomeActivity">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/createButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:tint="@color/white"
-        app:backgroundTint="@color/cardview_dark_background"
-        app:rippleColor="@color/colorAccent"
-        app:srcCompat="@android:drawable/ic_input_add" />
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/myEventsButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="My Events" />
-
-            <Button
-                android:id="@+id/mapsActivityButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Map View" />
-        </LinearLayout>
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/eventsRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-
-        <android.support.design.widget.FloatingActionButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            app:srcCompat="@android:drawable/ic_input_add" />
     </LinearLayout>
 
 </RelativeLayout>

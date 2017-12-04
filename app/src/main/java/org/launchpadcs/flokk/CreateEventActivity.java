@@ -141,8 +141,6 @@ public class CreateEventActivity extends AppCompatActivity {
                 } else {
                     final Event event = new Event(titleStr, descStr, dateStr, timeStr, locStr, email, latitude, longitude);
                     String json = createJSON(event);
-                    myIntent.putExtra("jsonObject", json);
-                    setResult(RESULT_OK, myIntent);
                     FlokkApiHelper.getInstance(getApplicationContext()).postEvent(event).enqueue(new Callback<Event>() {
                         @Override
                         public void onResponse(Call<Event> call, Response<Event> response) {
@@ -151,6 +149,7 @@ public class CreateEventActivity extends AppCompatActivity {
                                 return;
                             }
                             Toast.makeText(getApplicationContext(), "Something went right", Toast.LENGTH_SHORT);
+                            CreateEventActivity.this.onBackPressed();
                         }
 
                         @Override
@@ -167,7 +166,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(CreateEventActivity.this, HomeActivity.class);
+        Intent intent = new Intent(CreateEventActivity.this, TabActivity.class);
         startActivity(intent);
     }
 

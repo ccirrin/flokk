@@ -143,7 +143,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Log.d("TOK MASTER", TOKEN);
         Log.d("PHOTO_URL", photoUrl);
-        Intent myIntent = new Intent(LoginActivity.this, HomeActivity.class);
+        Intent myIntent = new Intent(LoginActivity.this, TabActivity.class);
         startActivity(myIntent);
         finish();
 

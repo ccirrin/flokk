@@ -148,7 +148,7 @@ public class EditEventActivity extends AppCompatActivity {
                                 return;
                             }
                             Toast.makeText(getApplicationContext(), "Something went right", Toast.LENGTH_SHORT);
-                            Intent intent = new Intent(EditEventActivity.this, MyEventsActivity.class);
+                            Intent intent = new Intent(EditEventActivity.this, TabActivity.class);
                             startActivity(intent);
                         }
 
@@ -167,7 +167,7 @@ public class EditEventActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(EditEventActivity.this, HomeActivity.class);
+        Intent intent = new Intent(EditEventActivity.this, TabActivity.class);
         startActivity(intent);
     }
 }

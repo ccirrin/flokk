@@ -4,6 +4,7 @@ package org.launchpadcs.flokk;
  * Created by ccirr on 10/11/2017.
  */
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -31,7 +32,7 @@ import retrofit2.Response;
 public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.MyViewHolder> {
 
     private List<Event> eventsList;
-    private MyEventsActivity con;
+    private Activity con;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, description, date, time, location;
@@ -50,7 +51,7 @@ public class MyEventsAdapter extends RecyclerView.Adapter<MyEventsAdapter.MyView
         }
     }
 
-    public MyEventsAdapter(List<Event> eventsList, MyEventsActivity con) {
+    public MyEventsAdapter(List<Event> eventsList, Activity con) {
         this.eventsList = eventsList;
         this.con = con;
     }

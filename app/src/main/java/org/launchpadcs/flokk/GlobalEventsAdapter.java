@@ -1,5 +1,6 @@
 package org.launchpadcs.flokk;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -25,7 +26,7 @@ import java.util.List;
 public class GlobalEventsAdapter extends RecyclerView.Adapter<GlobalEventsAdapter.MyViewHolder> {
 
     private static List<Event> eventsList;
-    private HomeActivity con;
+    private Activity con;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, description, date, time, location;
@@ -43,7 +44,7 @@ public class GlobalEventsAdapter extends RecyclerView.Adapter<GlobalEventsAdapte
         }
     }
 
-    public GlobalEventsAdapter(List<Event> eventsList, HomeActivity con) {
+    public GlobalEventsAdapter(List<Event> eventsList, Activity con) {
         this.eventsList = eventsList;
         this.con = con;
     }
