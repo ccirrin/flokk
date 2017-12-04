@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -28,6 +29,7 @@ public class GlobalEventsAdapter extends RecyclerView.Adapter<GlobalEventsAdapte
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, description, date, time, location;
+        public ImageButton emailButton;
         public CardView cardView;
         public MyViewHolder(View view) {
             super(view);
@@ -37,6 +39,7 @@ public class GlobalEventsAdapter extends RecyclerView.Adapter<GlobalEventsAdapte
             time = (TextView) view.findViewById(R.id.time);
             location = (TextView) view.findViewById(R.id.location);
             cardView = (CardView) view.findViewById(R.id.cv);
+            emailButton = (ImageButton) view.findViewById(R.id.emailButton);
         }
     }
 
@@ -66,6 +69,16 @@ public class GlobalEventsAdapter extends RecyclerView.Adapter<GlobalEventsAdapte
                 intent.putExtra("jsonObject", json);
                 con.startActivity(intent);
 
+            }
+        });
+        holder.emailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                emailIntent.setType("plain/text");
+                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{event.getEmail()});
+                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, event.getTitle());
+                con.startActivity(Intent.createChooser(emailIntent, "Send mail..."));
             }
         });
 
